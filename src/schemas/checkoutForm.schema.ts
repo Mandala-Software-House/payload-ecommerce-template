@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 export const CheckoutFormSchemaServer = z.object({
   buyerType: z.string().nonempty(),
@@ -104,15 +104,12 @@ export const useCheckoutFormSchema = () => {
     }
   });
 
-  const CheckoutFormSchemaResolver: ZodType<CheckoutFormData> = RefinedCheckoutFormSchema;
-
   const ShippingSchema = z.object({
     shipping: CheckoutFormSchema.shape.shipping,
   });
 
   return {
     CheckoutFormSchema: RefinedCheckoutFormSchema,
-    CheckoutFormSchemaResolver,
     ShippingFormSchemaResolver: ShippingSchema,
   };
 };

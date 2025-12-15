@@ -13,30 +13,26 @@ const ProductPage = async ({
   params: Promise<{ slug: string }>;
   searchParams: Promise<Record<string, string | undefined>>;
 }) => {
-  try {
-    const payload = await getPayload({ config });
-    const locale = (await getLocale()) as Locale;
-    const { slug } = await params;
-    const { docs } = await payload.find({
-      collection: "products",
-      depth: 2,
-      locale,
-      where: {
-        slug: {
-          equals: slug,
-        },
+  const payload = await getPayload({ config });
+  const locale = (await getLocale()) as Locale;
+  const { slug } = await params;
+  const { docs } = await payload.find({
+    collection: "products",
+    depth: 2,
+    locale,
+    where: {
+      slug: {
+        equals: slug,
       },
-    });
-    const { variant } = await searchParams;
+    },
+  });
+  const { variant } = await searchParams;
 
-    if (docs.length === 0) {
-      notFound();
-    }
-
-    return <ProductDetails variant={variant} product={docs[0]} />;
-  } catch {
+  if (docs.length === 0) {
     notFound();
   }
+
+  return <ProductDetails variant={variant} product={docs[0]} />;
 };
 
 export default ProductPage;

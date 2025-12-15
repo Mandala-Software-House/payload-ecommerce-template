@@ -2,7 +2,7 @@
 import { Select, useField, useFormFields, useLocale } from "@payloadcms/ui";
 import axios from "axios";
 import { stringify } from "qs-esm";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { type VariantsArr } from ".";
 
@@ -38,28 +38,28 @@ export const VariantSelectClient = ({ path }: { path: string }) => {
     { addQueryPrefix: true },
   );
 
-  const fetchVariants = useCallback(async () => {
-    try {
-      const { data } = await axios.get<Product>(`/api/products/${productID}${query}&locale=${locale.code}`, {
-        withCredentials: true,
-      });
-      if (!data?.variants) {
-        return;
-      }
-      setOptions(
-        data.variants.map((variant) => ({
-          label: variant.variantSlug ?? "",
-          value: variant.variantSlug ?? "",
-        })),
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }, [productID, locale.code, query]);
-
   useEffect(() => {
+    const fetchVariants = async () => {
+      try {
+        const { data } = await axios.get<Product>(`/api/products/${productID}${query}&locale=${locale.code}`, {
+          withCredentials: true,
+        });
+        if (!data?.variants) {
+          return;
+        }
+        setOptions(
+          data.variants.map((variant) => ({
+            label: variant.variantSlug ?? "",
+            value: variant.variantSlug ?? "",
+          })),
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     void fetchVariants();
-  }, [fetchVariants]);
+  }, [productID, locale.code, query]);
 
   return (
     <Select

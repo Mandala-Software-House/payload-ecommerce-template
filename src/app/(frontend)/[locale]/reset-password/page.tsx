@@ -1,6 +1,8 @@
 import { ResetPasswordForm } from "@/components/ResetPasswordForm";
 import { redirect } from "@/i18n/routing";
 
+export const dynamic = "force-dynamic";
+
 const ResetPassword = async ({
   params,
   searchParams,

@@ -13,10 +13,10 @@ import { type LoginFormData, useLoginFormSchema } from "@/schemas/loginForm.sche
 import { useCart } from "@/stores/CartStore";
 
 export const LoginForm = () => {
-  const { LoginFormSchemaResolver } = useLoginFormSchema();
+  const { LoginFormSchema } = useLoginFormSchema();
 
   const form = useForm<LoginFormData>({
-    resolver: zodResolver(LoginFormSchemaResolver),
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -84,7 +84,7 @@ export const LoginForm = () => {
           ""
         )}
         <div className="ml-auto text-sm/6">
-          <Link href="/forgot-password" className="font-semibold text-main-600 hover:text-main-500">
+          <Link href="/forgot-password" className="text-main-600 hover:text-main-500 font-semibold">
             {t("forgot-password")}
           </Link>
         </div>

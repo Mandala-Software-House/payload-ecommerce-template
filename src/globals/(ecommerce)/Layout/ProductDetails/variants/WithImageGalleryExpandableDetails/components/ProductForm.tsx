@@ -5,7 +5,7 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as FilledHeartIcon } from "@heroicons/react/24/solid";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { QuantityInput } from "@/components/(ecommerce)/QuantityInput";
 import { useRouter } from "@/i18n/routing";
@@ -42,7 +42,11 @@ export const ProductForm = ({
   const router = useRouter();
 
   const updateQuantity = (delta: number) => {
-    setQuantity((prev) => prev + delta);
+    setQuantity((prev) => {
+      const newQty = prev + delta;
+      // Clamp the quantity between min and max
+      return Math.min(Math.max(newQty, minQuantity), maxQuantity);
+    });
   };
 
   const setSelectedVariant = (slug?: string) => {
@@ -56,16 +60,6 @@ export const ProductForm = ({
 
     router.replace(`?${params.toString()}`, { scroll: false });
   };
-
-  useEffect(() => {
-    if (quantity > maxQuantity) {
-      setQuantity(maxQuantity);
-    }
-  }, [selectedVariant, maxQuantity, quantity, minQuantity]);
-
-  useEffect(() => {
-    setOverStock(false);
-  }, [cart, selectedVariant]);
 
   const isColorAvailable = (colorID: string) => {
     const isAvailable = filledVariants?.find((variant) => {

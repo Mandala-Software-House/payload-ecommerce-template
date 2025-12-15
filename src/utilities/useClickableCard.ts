@@ -4,12 +4,8 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, type RefObject } from "react";
 
 type UseClickableCardType<T extends HTMLElement> = {
-  card: {
-    ref: RefObject<T | null>;
-  };
-  link: {
-    ref: RefObject<HTMLAnchorElement | null>;
-  };
+  cardRef: RefObject<T | null>;
+  linkRef: RefObject<HTMLAnchorElement | null>;
 };
 
 type Props = {
@@ -94,11 +90,7 @@ export function useClickableCard<T extends HTMLElement>({
   }, [card, link, router]);
 
   return {
-    card: {
-      ref: card,
-    },
-    link: {
-      ref: link,
-    },
+    cardRef: card,
+    linkRef: link,
   };
 }

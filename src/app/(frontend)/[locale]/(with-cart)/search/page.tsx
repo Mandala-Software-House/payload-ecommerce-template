@@ -5,6 +5,8 @@ import { WithInlinePrice } from "@/globals/(ecommerce)/Layout/ProductList/varian
 import { routing } from "@/i18n/routing";
 import config from "@payload-config";
 
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

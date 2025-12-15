@@ -11,9 +11,9 @@ import { useRouter } from "@/i18n/routing";
 import { type ResetPasswordFormData, useResetPasswordForm } from "@/schemas/ResetPasswordFormSchema";
 
 export const ResetPasswordForm = ({ token, collection }: { token: string; collection: string }) => {
-  const { ResetPasswordFormResolver } = useResetPasswordForm();
+  const { ResetPasswordForm } = useResetPasswordForm();
   const form = useForm({
-    resolver: zodResolver(ResetPasswordFormResolver),
+    resolver: zodResolver(ResetPasswordForm),
     defaultValues: {
       newPassword: "",
       confirmPassword: "",
@@ -51,7 +51,7 @@ export const ResetPasswordForm = ({ token, collection }: { token: string; collec
     <main className="twp container my-auto flex h-full flex-col items-center">
       <Form {...form}>
         <form
-          className="grid w-full max-w-prose gap-4 rounded-lg bg-card p-8 shadow-lg"
+          className="bg-card grid w-full max-w-prose gap-4 rounded-lg p-8 shadow-lg"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <h1 className="text-xl font-semibold">{t("title")}</h1>

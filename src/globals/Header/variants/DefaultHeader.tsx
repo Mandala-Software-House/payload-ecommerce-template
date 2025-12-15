@@ -28,7 +28,9 @@ export const DefaultHeader = ({ data, disableCart }: { data: Header; disableCart
 
   const { toggleCart } = useCartState();
   const { cart } = useCart();
-  const [totalQuantity, setTotalQuantity] = useState<number>(0);
+
+  // Calculate total quantity directly during render
+  const totalQuantity = cart ? cart.reduce((acc, product) => acc + product.quantity, 0) : 0;
 
   const { toggleWishList } = useWishListState();
   const { wishlist } = useWishList();
@@ -53,13 +55,6 @@ export const DefaultHeader = ({ data, disableCart }: { data: Header; disableCart
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [data.hideOnScroll]);
-
-  useEffect(() => {
-    if (cart) {
-      const totalQuantity = cart.reduce((acc, product) => acc + product.quantity, 0);
-      setTotalQuantity(totalQuantity);
-    }
-  }, [cart]);
 
   const classes = cn(
     `sticky flex w-full top-0 justify-center md:px-12 transition-transform z-50`,

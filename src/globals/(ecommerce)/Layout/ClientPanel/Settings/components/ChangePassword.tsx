@@ -31,9 +31,9 @@ export const ChangePassword = ({ user }: { user: Customer }) => {
   const t = useTranslations("Account.settings");
   const [message, setMessage] = useState("");
 
-  const { ChangePasswordModalFormResolver } = useChangePasswordModalForm();
+  const { ChangePasswordModalForm } = useChangePasswordModalForm();
   const form = useForm<ChangePasswordModalFormData>({
-    resolver: zodResolver(ChangePasswordModalFormResolver),
+    resolver: zodResolver(ChangePasswordModalForm),
     defaultValues: {
       oldPassword: "",
       newPassword: "",

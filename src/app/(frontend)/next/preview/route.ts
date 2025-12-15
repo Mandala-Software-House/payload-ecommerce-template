@@ -1,5 +1,6 @@
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { draftMode } from "next/headers";
+import { type NextRequest } from "next/server";
 import { getPayload, type User } from "payload";
 
 import { type Locale } from "@/i18n/config";
@@ -8,18 +9,10 @@ import configPromise from "@payload-config";
 
 const payloadToken = "payload-token";
 
-export async function GET(
-  req: Request & {
-    cookies: {
-      get: (name: string) => {
-        value: string;
-      };
-    };
-  },
-): Promise<Response> {
+export async function GET(request: NextRequest): Promise<Response> {
   const payload = await getPayload({ config: configPromise });
-  const token = req.cookies.get(payloadToken)?.value;
-  const { searchParams } = new URL(req.url);
+  const token = request.cookies.get(payloadToken)?.value;
+  const { searchParams } = new URL(request.url);
   const path = searchParams.get("path");
   const locale = searchParams.get("locale") as Locale;
   const draft = await draftMode();
@@ -35,9 +28,9 @@ export async function GET(
   let user: User | JwtPayload | string | null = null;
 
   try {
-    user = jwt.verify(token, payload.secret);
+    user = jwt.verify(token ?? "", payload.secret);
   } catch (error) {
-    payload.logger.error("Error verifying token for live preview:", error);
+    payload.logger.error(`Error verifying token for live preview: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   // You can add additional checks here to see if the user is allowed to preview this page

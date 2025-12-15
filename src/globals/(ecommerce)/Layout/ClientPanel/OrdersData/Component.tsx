@@ -1,10 +1,9 @@
 "use client";
 import axios from "axios";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { type Country } from "@/globals/(ecommerce)/Couriers/utils/countryList";
 import { type Customer } from "@/payload-types";
 import { cn } from "@/utilities/cn";
 
@@ -20,19 +19,15 @@ export const OrdersData = ({
   const [selectedShipping, setSelectedShipping] = useState(
     user?.shippings?.find((shipping) => shipping.default) ?? user?.shippings?.[0],
   );
-  const [shippings, setShippings] = useState(user.shippings ?? []);
   const [addressDialogOpen, setAddressDialogOpen] = useState(false);
 
   const t = useTranslations("Account.orders-data");
 
   const setDefaultAddress = async () => {
     await updateCustomerData();
-    console.log(user.shippings);
     if (!selectedShipping || !user.shippings?.length) return;
 
-    console.log(user.shippings);
-
-    const updatedShippings = shippings.map((shipping) => ({
+    const updatedShippings = user.shippings.map((shipping) => ({
       ...shipping,
       default: shipping.id === selectedShipping.id,
     }));
@@ -43,7 +38,6 @@ export const OrdersData = ({
       });
 
       if (data?.doc.shippings) {
-        setShippings(data.doc.shippings);
         setSelectedShipping(data.doc.shippings.find((s) => s.default) ?? data.doc.shippings[0]);
       }
     } catch (error) {
@@ -51,31 +45,19 @@ export const OrdersData = ({
     }
   };
 
-  useEffect(() => {
-    setShippings(user.shippings ?? []);
-    setSelectedShipping(user.shippings?.find((shipping) => shipping.default) ?? user.shippings?.[0]);
-  }, [user.shippings]);
-
   return (
     <section className="no-prose">
       <AddNewAddressDialog
         open={addressDialogOpen}
         setOpen={setAddressDialogOpen}
         user={user}
-        setShipping={async (shipping) => {
-          setShippings((prevState) => [
-            ...prevState,
-            {
-              ...shipping,
-              country: shipping.country as Country,
-            },
-          ]);
+        setShipping={async (_shipping) => {
           await updateCustomerData();
         }}
       />
       <h2 className="mb-8 text-xl font-bold">{t("title")}</h2>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {shippings
+        {(user.shippings ?? [])
           .sort((a, b) => {
             if (a.default === b.default) return 0;
             return a.default ? -1 : 1;

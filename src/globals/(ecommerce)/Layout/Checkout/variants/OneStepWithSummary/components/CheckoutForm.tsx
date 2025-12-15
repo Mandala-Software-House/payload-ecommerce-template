@@ -45,7 +45,7 @@ export type FilledCourier = {
 };
 
 export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowidgetToken?: string }) => {
-  const { CheckoutFormSchemaResolver } = useCheckoutFormSchema();
+  const { CheckoutFormSchema } = useCheckoutFormSchema();
   const t = useTranslations("CheckoutForm.form");
   const c = useTranslations("CheckoutForm.countries");
 
@@ -58,7 +58,7 @@ export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowid
   console.log(defaultShippingAddress);
 
   const form = useForm<CheckoutFormData>({
-    resolver: zodResolver(CheckoutFormSchemaResolver),
+    resolver: zodResolver(CheckoutFormSchema),
     defaultValues: {
       buyerType: user?.lastBuyerType ?? "individual",
       individualInvoice: false,
@@ -224,7 +224,7 @@ export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowid
 
               <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                 {shippingAddresses ? (
-                  <div className="group relative flex cursor-pointer rounded-lg border border-gray-300 border-transparent bg-white p-4 shadow-xs ring-2 ring-main-500 focus:outline-hidden">
+                  <div className="group ring-main-500 relative flex cursor-pointer rounded-lg border border-gray-300 border-transparent bg-white p-4 shadow-xs ring-2 focus:outline-hidden">
                     <span className="flex flex-1">
                       <span className="flex w-full flex-col">
                         <span className="block text-sm font-medium text-gray-900">{shipping.name}</span>
@@ -239,7 +239,7 @@ export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowid
                         <Button
                           type="button"
                           onClick={() => setShippingDialogOpen(true)}
-                          className="ml-auto mt-1 text-sm text-main-600"
+                          className="text-main-600 mt-1 ml-auto text-sm"
                         >
                           {t("change")}
                         </Button>
@@ -254,7 +254,7 @@ export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowid
                     control={form.control}
                     name="individualInvoice"
                     render={({ field }) => (
-                      <FormItem className="rounded-mdp-4 flex flex-row items-start space-x-3 space-y-0 sm:col-span-2">
+                      <FormItem className="rounded-mdp-4 flex flex-row items-start space-y-0 space-x-3 sm:col-span-2">
                         <FormControl>
                           <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                         </FormControl>
@@ -331,7 +331,7 @@ export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowid
                           <FormControl>
                             <Select onValueChange={field.onChange} defaultValue={field.value ?? "pl"}>
                               <FormControl>
-                                <SelectTrigger className="w-full appearance-none rounded-md bg-white py-2 pr-3 text-base text-gray-900 outline-solid outline-1 -outline-offset-1 outline-gray-300 focus:outline-solid focus:outline-2 focus:-outline-offset-2 focus:outline-main-600 focus:ring-0 focus:ring-offset-0 sm:text-sm/6">
+                                <SelectTrigger className="focus:outline-main-600 w-full appearance-none rounded-md bg-white py-2 pr-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 outline-solid focus:ring-0 focus:ring-offset-0 focus:outline-2 focus:-outline-offset-2 focus:outline-solid sm:text-sm/6">
                                   <SelectValue placeholder={t("country-placeholder")} />
                                 </SelectTrigger>
                               </FormControl>
@@ -396,11 +396,11 @@ export const CheckoutForm = ({ user, geowidgetToken }: { user?: Customer; geowid
                           value={deliveryMethod.slug}
                           aria-label={deliveryMethod.title}
                           aria-description={`${deliveryMethod.turnaround} for price`}
-                          className="group relative flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white p-4 shadow-xs focus:outline-hidden data-checked:border-transparent data-focus:ring-2 data-focus:ring-main-500"
+                          className="group data-focus:ring-main-500 relative flex cursor-pointer items-center rounded-lg border border-gray-300 bg-white p-4 shadow-xs focus:outline-hidden data-checked:border-transparent data-focus:ring-2"
                         >
                           <span
                             aria-hidden="true"
-                            className="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent group-data-focus:border group-data-checked:border-main-500"
+                            className="group-data-checked:border-main-500 pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent group-data-focus:border"
                           />
 
                           <DeliveryMethod geowidgetToken={geowidgetToken} deliveryMethod={deliveryMethod} />

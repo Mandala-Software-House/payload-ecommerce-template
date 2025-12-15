@@ -12,10 +12,10 @@ import { Input } from "@/components/ui/input";
 import { type RegisterFormData, useRegisterFormSchema } from "@/schemas/registerForm.schema";
 
 export const RegisterForm = () => {
-  const { RegisterFormSchemaResolver } = useRegisterFormSchema();
+  const { RegisterFormSchema } = useRegisterFormSchema();
 
   const form = useForm<RegisterFormData>({
-    resolver: zodResolver(RegisterFormSchemaResolver),
+    resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
       email: "",
       password: "",

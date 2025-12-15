@@ -4,6 +4,8 @@ import { redirect } from "@/i18n/routing";
 import { getCustomer } from "@/utilities/getCustomer";
 import { getCachedGlobal } from "@/utilities/getGlobals";
 
+export const dynamic = "force-dynamic";
+
 const RegisterPage = async ({ params }: { params: Promise<{ locale: Locale }> }) => {
   const user = await getCustomer();
   const { locale } = await params;

@@ -3,9 +3,9 @@ import { fileURLToPath } from "url";
 
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { en } from "@payloadcms/translations/languages/en";
+import { pl } from "@payloadcms/translations/languages/pl";
 import { buildConfig } from "payload";
-import { en } from "payload/i18n/en";
-import { pl } from "payload/i18n/pl";
 import sharp from "sharp"; // sharp-import
 
 import { defaultLexical } from "@/fields/defaultLexical";
