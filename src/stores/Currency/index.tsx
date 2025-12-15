@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { create } from "zustand";
 
 import canUseDOM from "@/utilities/canUseDOM";
@@ -11,8 +10,16 @@ type CurrencyState = {
   setCurrency: (currency: Currency) => void;
 };
 
+const getInitialCurrency = (): Currency => {
+  if (canUseDOM) {
+    const stored = window.localStorage.getItem("currency") as Currency | null;
+    if (stored) return stored;
+  }
+  return "USD";
+};
+
 const useCurrencyStore = create<CurrencyState>((set) => ({
-  currency: "USD",
+  currency: getInitialCurrency(),
   setCurrency: (currencyToSet: Currency) => {
     if (canUseDOM) {
       window.localStorage.setItem("currency", currencyToSet);
@@ -21,22 +28,4 @@ const useCurrencyStore = create<CurrencyState>((set) => ({
   },
 }));
 
-export const useCurrency = () => {
-  const { currency, setCurrency } = useCurrencyStore();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (isClient) {
-      const storedCurrency = window.localStorage.getItem("currency") as Currency | null;
-      if (storedCurrency) {
-        setCurrency(storedCurrency);
-      }
-    }
-  }, [isClient, setCurrency]);
-
-  return { currency, setCurrency };
-};
+export const useCurrency = () => useCurrencyStore();

@@ -30,7 +30,7 @@ export async function GET(request: NextRequest): Promise<Response> {
   try {
     user = jwt.verify(token ?? "", payload.secret);
   } catch (error) {
-    payload.logger.error("Error verifying token for live preview:", error);
+    payload.logger.error(`Error verifying token for live preview: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   // You can add additional checks here to see if the user is allowed to preview this page

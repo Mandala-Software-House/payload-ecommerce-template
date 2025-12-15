@@ -8,24 +8,19 @@ import { getCachedGlobal } from "@/utilities/getGlobals";
 import { WithSidebar } from "./variants/WithSidebar";
 
 export const ClientPanel = async ({ children }: { children: ReactNode }) => {
-  try {
-    const locale = (await getLocale()) as Locale;
-    const { clientPanel } = await getCachedGlobal("shopLayout", locale, 1)();
+  const locale = (await getLocale()) as Locale;
+  const { clientPanel } = await getCachedGlobal("shopLayout", locale, 1)();
 
-    let ClientPanelComponent: ReactNode = null;
-    switch (clientPanel.type) {
-      case "withSidebar":
-        ClientPanelComponent = <WithSidebar>{children}</WithSidebar>;
-        break;
-    }
+  let ClientPanelComponent: ReactNode = null;
+  switch (clientPanel.type) {
+    case "withSidebar":
+      ClientPanelComponent = <WithSidebar>{children}</WithSidebar>;
+      break;
+  }
 
-    if (!ClientPanelComponent) {
-      notFound();
-    }
-
-    return ClientPanelComponent;
-  } catch (error) {
-    console.log(error);
+  if (!ClientPanelComponent) {
     notFound();
   }
+
+  return ClientPanelComponent;
 };

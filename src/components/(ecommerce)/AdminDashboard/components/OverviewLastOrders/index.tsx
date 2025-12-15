@@ -73,7 +73,7 @@ export const OverviewLastOrders = () => {
         return (
           <Button
             variant="ghost"
-            className="px-0 text-base hover:bg-payload-elevation-0"
+            className="hover:bg-payload-elevation-0 px-0 text-base"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             {t("adminDashboard:date")}
@@ -92,7 +92,7 @@ export const OverviewLastOrders = () => {
         return (
           <Button
             variant="ghost"
-            className="px-0 text-base hover:bg-payload-elevation-0"
+            className="hover:bg-payload-elevation-0 px-0 text-base"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             {t("adminDashboard:status")}
@@ -110,7 +110,7 @@ export const OverviewLastOrders = () => {
         return (
           <Button
             variant="ghost"
-            className="px-0 text-base hover:bg-payload-elevation-0"
+            className="hover:bg-payload-elevation-0 px-0 text-base"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             {t("adminDashboard:email")}
@@ -123,7 +123,7 @@ export const OverviewLastOrders = () => {
     {
       id: "amount",
       header: () => (
-        <div className="text-right hover:bg-payload-elevation-0">{t("adminDashboard:amount")}</div>
+        <div className="hover:bg-payload-elevation-0 text-right">{t("adminDashboard:amount")}</div>
       ),
       cell: ({ row }) => {
         const amount = row.original.orderDetails.totalWithShipping;
@@ -258,7 +258,7 @@ export const OverviewLastOrders = () => {
     },
   });
   return (
-    <Card className="twp rounded-xl border border-payload-elevation-150 bg-transparent lg:col-span-3">
+    <Card className="twp border-payload-elevation-150 rounded-xl border bg-transparent lg:col-span-3">
       <CardHeader>
         <CardTitle>{t("adminDashboard:recentOrders")}</CardTitle>
       </CardHeader>
@@ -272,14 +272,14 @@ export const OverviewLastOrders = () => {
                 onChange={(event) => {
                   table.getColumn("email")?.setFilterValue(event.target.value);
                 }}
-                className="h-10 max-w-sm placeholder:text-payload-elevation-900 placeholder:opacity-75"
+                className="placeholder:text-payload-elevation-900 h-10 max-w-sm placeholder:opacity-75"
               />
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
-                  className="ml-auto border-payload-elevation-150 bg-payload-elevation-50 text-base hover:bg-payload-background-color"
+                  className="border-payload-elevation-150 bg-payload-elevation-50 hover:bg-payload-background-color ml-auto text-base"
                 >
                   {t("adminDashboard:columns")} <ChevronDown className="ml-2" width={20} height={20} />
                 </Button>
@@ -292,7 +292,7 @@ export const OverviewLastOrders = () => {
                     return (
                       <DropdownMenuCheckboxItem
                         key={column.id}
-                        className="cursor-pointer text-base capitalize hover:bg-payload-elevation-0"
+                        className="hover:bg-payload-elevation-0 cursor-pointer text-base capitalize"
                         checked={column.getIsVisible()}
                         onCheckedChange={(value) => column.toggleVisibility(!!value)}
                       >
@@ -303,7 +303,7 @@ export const OverviewLastOrders = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <div className="rounded-lg border border-payload-elevation-150">
+          <div className="border-payload-elevation-150 rounded-lg border">
             <Table className="text-base">
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -351,7 +351,7 @@ export const OverviewLastOrders = () => {
           <div className="flex items-center justify-end space-x-2 py-4">
             <Button
               variant="outline"
-              className="border border-payload-elevation-150 bg-payload-elevation-50 text-base hover:bg-payload-elevation-0"
+              className="border-payload-elevation-150 bg-payload-elevation-50 hover:bg-payload-elevation-0 border text-base"
               size="sm"
               onClick={() => handlePaginationChange(currentPage - 1)}
               disabled={currentPage <= 1}
@@ -360,7 +360,7 @@ export const OverviewLastOrders = () => {
             </Button>
             <Button
               variant="outline"
-              className="border border-payload-elevation-150 bg-payload-elevation-50 text-base hover:bg-payload-elevation-0"
+              className="border-payload-elevation-150 bg-payload-elevation-50 hover:bg-payload-elevation-0 border text-base"
               size="sm"
               onClick={() => handlePaginationChange(currentPage + 1)}
               disabled={data.length < 6}

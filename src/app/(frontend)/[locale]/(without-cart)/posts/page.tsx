@@ -12,8 +12,7 @@ import PageClient from "./page.client";
 
 import type { Metadata } from "next/types";
 
-export const dynamic = "force-static";
-export const revalidate = 600;
+export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const payload = await getPayload({ config });

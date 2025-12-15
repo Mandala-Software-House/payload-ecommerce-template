@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 export const CheckoutFormSchemaServer = z.object({
   buyerType: z.string().nonempty(),

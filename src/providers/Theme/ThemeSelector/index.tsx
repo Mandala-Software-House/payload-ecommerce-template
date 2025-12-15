@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -10,7 +10,13 @@ import { useTheme } from "..";
 
 export const ThemeSelector = () => {
   const { setTheme } = useTheme();
-  const [value, setValue] = useState("");
+  // Lazy initialization - only runs once
+  const [value, setValue] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.localStorage.getItem(themeLocalStorageKey) ?? "auto";
+    }
+    return "auto";
+  });
 
   const onThemeChange = (themeToSet: Theme & "auto") => {
     if (themeToSet === "auto") {
@@ -21,11 +27,6 @@ export const ThemeSelector = () => {
       setValue(themeToSet);
     }
   };
-
-  useEffect(() => {
-    const preference = window.localStorage.getItem(themeLocalStorageKey);
-    setValue(preference ?? "auto");
-  }, []);
 
   return (
     <Select onValueChange={onThemeChange} value={value}>

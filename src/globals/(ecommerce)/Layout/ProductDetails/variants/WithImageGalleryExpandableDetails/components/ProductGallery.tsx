@@ -1,6 +1,6 @@
 "use client";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useState } from "react";
 
 import { Media } from "@/components/Media";
 import { type Product } from "@/payload-types";
@@ -11,8 +11,6 @@ export const ProductGallery = ({
   product,
   tabs,
   selectedVariant,
-  minQuantity,
-  maxQuantity,
   children,
 }: {
   product: Product;
@@ -24,17 +22,12 @@ export const ProductGallery = ({
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  useEffect(() => {
-    setSelectedTab(0);
-  }, [selectedVariant, minQuantity, maxQuantity]);
-
   return (
     <TabGroup
+      key={selectedVariant?.slug}
       defaultIndex={0}
       selectedIndex={selectedTab}
-      onChange={(index) => {
-        setSelectedTab(index);
-      }}
+      onChange={setSelectedTab}
       className="flex flex-col-reverse"
     >
       {/* Image selector - client */}
