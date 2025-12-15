@@ -7,7 +7,9 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import PlausibleProvider from "next-plausible";
-import { type ReactNode, ViewTransition } from "react";
+import { type ReactNode } from "react";
+// ViewTransition
+// import { ViewTransition } from "react";
 
 import "../globals.css";
 // import { LivePreviewListener } from "@/components/LivePreviewListener";
@@ -56,25 +58,25 @@ export default async function RootLayout({
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body className="max-w-screen overflow-x-clip">
-        <ViewTransition>
-          <Providers>
-            <PlausibleProvider
-              domain="ecommerce.mandala.sh"
-              selfHosted={true}
-              customDomain="plausible.pimento.cloud"
-            />
-            <NextIntlClientProvider locale={locale} messages={messages}>
-              {/* <AdminBar
+        {/* <ViewTransition> */}
+        <Providers>
+          <PlausibleProvider
+            domain="ecommerce.mandala.sh"
+            selfHosted={true}
+            customDomain="plausible.pimento.cloud"
+          />
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {/* <AdminBar
               adminBarProps={{
                 preview: isEnabled,
               }}
             /> */}
-              {/* {isEnabled && <LivePreviewListener />} */}
-              {children}
-              <Footer />
-            </NextIntlClientProvider>
-          </Providers>
-        </ViewTransition>
+            {/* {isEnabled && <LivePreviewListener />} */}
+            {children}
+            <Footer />
+          </NextIntlClientProvider>
+        </Providers>
+        {/* </ViewTransition> */}
       </body>
     </html>
   );
