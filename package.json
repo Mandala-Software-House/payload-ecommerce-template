@@ -1,6 +1,6 @@
 {
   "name": "payload-ecommerce-template",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ecommerce template built with PayloadCMS and Next.js",
   "license": "MIT",
   "type": "module",
