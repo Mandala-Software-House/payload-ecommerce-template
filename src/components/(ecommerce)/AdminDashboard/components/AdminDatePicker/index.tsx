@@ -101,7 +101,6 @@ export function AdminDatePicker({ className }: React.HTMLAttributes<HTMLDivEleme
           align={isMobile ? "start" : "end"}
         >
           <Calendar
-            initialFocus
             mode="range"
             defaultMonth={date?.from}
             selected={date}

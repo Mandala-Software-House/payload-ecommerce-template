@@ -104,15 +104,12 @@ export const useCheckoutFormSchema = () => {
     }
   });
 
-  const CheckoutFormSchemaResolver: ZodType<CheckoutFormData> = RefinedCheckoutFormSchema;
-
   const ShippingSchema = z.object({
     shipping: CheckoutFormSchema.shape.shipping,
   });
 
   return {
     CheckoutFormSchema: RefinedCheckoutFormSchema,
-    CheckoutFormSchemaResolver,
     ShippingFormSchemaResolver: ShippingSchema,
   };
 };

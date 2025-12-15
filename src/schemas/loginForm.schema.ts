@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 export type LoginFormData = {
   email: string;
@@ -14,7 +14,5 @@ export const useLoginFormSchema = () => {
     password: z.string().nonempty(t("password")),
   });
 
-  const LoginFormSchemaResolver: ZodType<LoginFormData> = LoginFormSchema;
-
-  return { LoginFormSchema, LoginFormSchemaResolver };
+  return { LoginFormSchema };
 };

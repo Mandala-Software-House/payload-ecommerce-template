@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 export type RegisterFormData = {
   email: string;
@@ -31,7 +31,5 @@ export const useRegisterFormSchema = () => {
       path: ["confirmPassword"],
     });
 
-  const RegisterFormSchemaResolver: ZodType<RegisterFormData> = RegisterFormSchema;
-
-  return { RegisterFormSchema, RegisterFormSchemaResolver };
+  return { RegisterFormSchema };
 };

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 export type ChangePasswordModalFormData = {
   oldPassword: string;
@@ -25,7 +25,5 @@ export const useChangePasswordModalForm = () => {
       path: ["newPassword"],
     });
 
-  const ChangePasswordModalFormResolver: ZodType<ChangePasswordModalFormData> = ChangePasswordModalForm;
-
-  return { ChangePasswordModalForm, ChangePasswordModalFormResolver };
+  return { ChangePasswordModalForm };
 };

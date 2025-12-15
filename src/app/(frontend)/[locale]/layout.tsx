@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import PlausibleProvider from "next-plausible";
-import { type ReactNode, unstable_ViewTransition as ViewTransition } from "react";
+import { type ReactNode, ViewTransition } from "react";
 
 import "../globals.css";
 // import { LivePreviewListener } from "@/components/LivePreviewListener";

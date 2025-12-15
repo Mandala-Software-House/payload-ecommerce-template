@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { z, type ZodType } from "zod";
+import { z } from "zod";
 
 export type ResetPasswordFormData = {
   newPassword: string;
@@ -19,7 +19,5 @@ export const useResetPasswordForm = () => {
       path: ["confirmPassword"],
     });
 
-  const ResetPasswordFormResolver: ZodType<ResetPasswordFormData> = ResetPasswordForm;
-
-  return { ResetPasswordForm, ResetPasswordFormResolver };
+  return { ResetPasswordForm };
 };
