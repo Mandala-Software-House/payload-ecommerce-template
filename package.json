@@ -20,7 +20,7 @@
     "knip": "knip"
   },
   "overrides": {
-    "react-is": "^19.2.3"
+    "react-is": "^19.2.4"
   },
   "dependencies": {
     "@eslint/compat": "^2.0.0",
@@ -71,7 +71,7 @@
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.561.0",
     "motion": "^12.23.26",
-    "next": "^15.5.9",
+    "next": "^15.5.10",
     "next-intl": "^4.6.0",
     "next-plausible": "^3.12.5",
     "next-sitemap": "^4.2.3",
@@ -82,10 +82,10 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "prism-react-renderer": "^2.4.1",
     "qs-esm": "^7.0.2",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "react-colorful": "^5.6.1",
     "react-day-picker": "9.12.0",
-    "react-dom": "^19.2.3",
+    "react-dom": "^19.2.4",
     "react-hook-form": "7.68.0",
     "recharts": "^3.6.0",
     "server-only": "^0.0.1",
@@ -99,7 +99,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
-    "@next/eslint-plugin-next": "^15.5.9",
+    "@next/eslint-plugin-next": "^15.5.10",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
     "@types/escape-html": "^1.0.4",
@@ -113,7 +113,7 @@
     "@typescript-eslint/parser": "^8.49.0",
     "copyfiles": "^2.4.1",
     "eslint": "^9.39.2",
-    "eslint-config-next": "15.5.9",
+    "eslint-config-next": "15.5.10",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.0.1",
